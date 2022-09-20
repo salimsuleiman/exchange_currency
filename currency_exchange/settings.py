@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['pure-forest-07337.herokuapp.com',
                 '127.0.0.1', '*']
-ALLOWED_HOSTS = ['pure-forest-07337.herokuapp.com/', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['pure-forest-07337.herokuapp.com/', '127.0.0.1', '*', 'localhost']
 
 
 # https://git.heroku.com/pure-forest-07337.git
