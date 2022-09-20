@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block header %} 
+الملف الشخصى{% endblock header %}
+{% block title  %}
+الملف الشخصي
+        {% endblock title  %}
+{% block style  %}
+<link rel="stylesheet" href="{% static 'profile.css'  %}">
+{% endblock style  %}
+
+
+{% block content %} 
+
+
+<div class="profile">
+<h3>{{request.user.first_name}} {{request.user.last_name}}</h3>
+<p>{{request.user.username}}@</p>
+<p><b>معرف الحساب:</b> {{request.user.id}}</p>
+<p><b>نوع الحساب:</b> {% if request.user.is_admin   %} <em>Admin</em>  {% else  %} <em>Employee</em>   {% endif   %}
+
+</p>
+<p><b>حالة الحساب: </b>
+
+{% if request.user.is_blocked   %} 
+
+
+<em>Blocked</em>  
+
+{% else  %} <em>Active</em>   
+
+
+{% endif   %}
+
+</p>
+{% if not request.user.is_admin  %}
+
+<p><b>Pass: </b>{{request.user.pass_entry}}</p>
+
+{% endif  %}
+<p><b>آخر تسجيل دخول  : </b>{{request.user.last_login}}</p>
+<p><b>تاريخ الانضمام  : </b>{{request.user.date_joined}}</p>
+<p><a href="/users/logout/"> تسجيل خروج </a></p>
+</div>
+  
+
+            
+{% endblock content %}

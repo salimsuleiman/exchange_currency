@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html ldir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="shortcut icon" href="{% static 'imgs/site_logo.png'  %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'styles.css'  %}">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />--> 
+{% block style  %}
+
+{% endblock style  %}
+    <title>{% block title  %}
+
+        {% endblock title  %}</title>
+    <script src="https://kit.fontawesome.com/3e42c235bf.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+{% if request.user.is_blocked and not request.user.is_admin  %}
+<h1 style="text-align: center; margin-top: 20px; color: red">Dear '{{ request.user.username  }}', it appears that your access to the webpage is currently restricted. Contact the administrator for more information.
+
+{% else  %}
+
+
+<header>
+        <i class="fa-solid fa-users"></i>
+        <h2>
+        {% block header %} 
+    
+    {% endblock header %}
+        </h2>
+    </header>
+     <main>
+
+        {% if request.user.is_authenticated  %}
+             <nav class="nav-tabs">
+            <ul>
+                
+                <li><a href="/currencies/exchange/"> البيع اليومي</a></li>
+                <li><a href="/users/profile/"><i class="fa-regular fa-user"></i>  الملف الشخصيي</a></li>
+
+                <li><a href="/users/"><i class="fa-solid fa-users"></i> المستخدمين</a></li>
+                <li><a href="/users/logout/"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل خروج </a></li>
+
+                <li><a href="/currencies/reciepts/"><i class="fa-solid fa-receipt"></i> المستلمون</a></li>
+
+                <li><a href="/currencies/warehouse/"><i class="fa-light fa-file-chart-column"></i>  مستودع</a></li>
+
+                {% comment %} <li><a href="/profits/"><i class="fa-thin fa-file-chart-pie"></i> التقرير </a></li> {% endcomment %}
+
+
+                <li><a href="/currencies/rates/"><i class="fa-light fa-file-chart-column"></i>  سعر العملة</a></li>
+
+                
+            </ul>
+
+        </nav>
+
+        {% endif  %}
+
+        
+    {% block content %} 
+    
+    {% endblock content %}
+
+      </main>
+
+
+
+
+
+{% endif  %}
+
+
+</html>

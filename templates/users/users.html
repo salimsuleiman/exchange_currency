@@ -1,0 +1,140 @@
+{% extends "base.html" %} 
+
+
+{% block header %} 
+المستخدمين
+{% endblock header %}
+
+{% block title  %}
+المستخدمين        
+{% endblock title  %}
+
+{% load static %}
+{% block content %} 
+    
+    
+   
+
+
+        <div class="container">
+           <table>
+               
+                    <tr>
+                        <th>التسلسل</th>
+                        <th>الاسم الاول
+                        </th>
+                        <th>اللقب</th>
+                         <th>اسم المستخدم</th>
+                        <th>كلمة المرور</th>
+                          {% if request.user.is_admin  %}
+                        <th>الاجراء</th>
+
+                        {% endif  %}
+                    </tr>
+                   
+                    {% for employee in employees  %}
+                        
+                        <tr>
+                        <td>{{employee.id}}</td>
+                        
+                        <td>{{employee.first_name}}</td>
+                        <td>{{employee.last_name}}</td>
+                        <td>{{employee.username}}</td>
+                         <td>{{employee.pass_entry}}</td>
+                           {% if request.user.is_admin  %}
+                        <td>
+                            <button class="edit">
+                            <a href="/users/edit/{{employee.id}}/">
+                                تعديل
+                            </a>
+                            
+                            </button>
+                            <button class="delete"><a href="/users/delete/{{employee.id}}/">
+                                حذف
+                            </a></button>
+                        </td>
+
+                        {% endif  %}
+                    </tr>
+                    {% endfor  %}
+                    
+                   
+                    
+                
+   
+           </table>
+
+
+           
+           <div class="employee">
+            <p style="font-size: 18px; display: inline;">
+                <span style="font-weight: 500; color: green;">{{request.user.username}} أهلا بك
+                </span> 
+                
+            </p>
+               
+            <div>
+                <p>
+
+                    <strong>التاريخ:</strong>  الجمعة 8 مارس 2022   
+                </p>
+                <p> <strong>هوية الموظف : </strong> 12455</p>
+               
+            </div>
+            <div class="rules">
+                <p>يرجى التأكد من اتباع القواعد التالية عند حضور العميل</p>
+                <ol>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                </ol>
+            </div>
+</div>
+        </div>
+    
+
+            <div class="container">
+                <div class="addnew-user customer-details">
+                        
+                    
+
+                        {% for message in messages %}
+                            <p style="color: red">  {{ message }}</p>
+                        {% endfor %}
+
+                          {% if request.user.is_admin  %}
+                          <h3>أضافة موظف جديد</h3>
+                        <form action="/users/add/" method="post">
+                        
+                            {% csrf_token %}
+
+
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="First Name" name="first_name" />
+                            </div>
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="Last Name" name="last_name" />
+                            </div>
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="اسم المستخدم" name="username" />
+                            </div>
+                            <div class="form-control">
+                            
+                                <input type="password" placeholder="كلمة المرور" name="pass_entry" />
+                            </div>
+                            <button>اضافة</button>
+                        </form>
+
+                        {% endif  %}
+                </div>
+            </div>
+  
+{% endblock content %}

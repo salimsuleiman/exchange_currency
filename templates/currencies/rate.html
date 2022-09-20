@@ -1,0 +1,117 @@
+{% extends "base.html" %} 
+
+{% load static %}
+{% block header %} 
+سعر العملة{% endblock header %}
+{% block title  %}
+سعر العملة        {% endblock title  %}
+{% block content %} 
+    
+
+        <div class="container">
+           <table>
+               
+                    <tr>
+                        <th>اسم</th>
+                        <th>سعر شراء</th>
+                        <th>سعر البيع</th>
+                         {% if request.user.is_admin  %}
+                        <th>الاجراء</th>
+                        {% endif  %}
+                    </tr>
+                   
+    
+                    {% for c in currencies  %}
+
+                    <tr>
+                        <td>{{c.name}} {{c.symbol}}</td>
+                        <td>{{c.sell_price}}ع.د</td>
+                        <td>{{c.buy_price}}ع. ع.د</td>
+                        {% if request.user.is_admin  %}
+                        <td>
+                            <button class="edit">
+                            <a href="/currencies/edit/{{c.id}}/">
+                                edit
+                            </a>
+                            
+                            </button>
+                            <button class="delete"><a href="/currencies/delete/{{c.id}}/">
+                                delete
+                            </a></button>
+                        </td>
+                        {% endif  %}
+                    </tr>
+                    {% endfor  %}
+                   
+           </table>
+           
+           <div class="employee">
+            <p style="font-size: 18px; display: inline;">
+                <span style="font-weight: 500; color: green;">{{request.user.username}} أهلا بك
+                </span> 
+                
+            </p>
+               
+            <div>
+                <p>
+
+                    <strong>التاريخ:</strong>  الجمعة 8 مارس 2022   
+                </p>
+                <p> <strong>هوية الموظف : </strong> 12455</p>
+               
+            </div>
+            <div class="rules">
+                <p>يرجى التأكد من اتباع القواعد التالية عند حضور العميل</p>
+                <ol>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                  <li>efrtg5rtg5rt</li>
+                </ol>
+            </div>
+</div>
+        </div>
+          <div class="container">
+                <div class="addnew-user customer-details">
+                        
+                    
+
+                        {% for message in messages %}
+                            <p style="color: red">  {{ message }}</p>
+                        {% endfor %}
+
+                         {% if request.user.is_admin  %}
+                         <h3>Add  new currency</h3>
+                        <form action="/currencies/add/" method="POST">
+                        
+                            {% csrf_token %}
+
+
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="Currency Name" name="name" />
+                            </div>
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="Symbol" name="symbol" />
+                            </div>
+                            <div class="form-control">
+                            
+                                <input type="number" placeholder="Buy Price" name="buy_price" />
+                            </div>
+                             <div class="form-control">
+                            
+                                <input type="number" placeholder="Sell Price" name="sell_price" />
+                            </div>
+                            
+                            <button>اضافة</button>
+                        </form>
+
+                        {% endif  %}
+                </div>
+            </div>
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block header %} 
+ البيع اليومي
+{% endblock header %}
+{% block title  %}
+ البيع اليومي
+        {% endblock title  %}
+{% block style  %}
+<link rel="stylesheet" href="{% static 'profile.css'  %}">
+{% endblock style  %}
+
+
+{% block content %} 
+
+        <div class="container">
+            <div style="width: 65%;">
+                
+                <div class="exchange-box">
+                    <div class="box1">
+                        <form action="/currencies/exchange/" method="POST">
+                            {% csrf_token %}
+                           <div class="form-control">
+                            <span>المبلغ
+                            </span>
+                            <input type="number" name="amount">
+                           </div>
+                           <div class="form-control">
+                            <span>العملة</span>
+                            <select name="currency" id="" >
+                                {% for c in currencies  %}
+                                    <option value="{{c.id}}">{{c.name}} ({{c.symbol}})</option>
+                                {% endfor  %}
+                                
+                    
+                            </select>
+                           </div>
+                           <hr>
+                           <div class="form-control">
+                            <span>إلى</span>
+                            <select name="currency_to" id="">
+                                {% for c in currencies  %}
+                                    <option value="{{c.id}}">{{c.name}} ({{c.symbol}})</option>
+                                {% endfor  %}
+                            </select>
+                           </div>
+                           <div class="form-control">
+                           <button style="background-color: blue;">تبادل</button>
+                           </div>
+                        </form>
+                    </div>
+                    <div class="box2">
+
+                        {% if money  %}
+                        <p>يتلقى المستلم   
+                                         </p>
+                        <h3>{{symbol_to}}   {{money}} </h3>
+                        <p>Sell rate of <strong>{{rate}}  </strong> per {{symbol}}  </p>
+
+                        {% endif  %}
+                    </div>
+                </div>
+    
+                <div class="customer-details">
+                    <h3>معلومات الزبون
+                    </h3>
+                    <form action="">
+                        <div class="form-control">
+                          
+                            <input type="text" placeholder="الاسم الكامل
+                            " name="name" required>
+                           </div>
+                           <div class="form-control">
+                          
+                            <input name="phone" type="text" placeholder="رقم الهاتف" required>
+                           </div>
+                           <div>
+                            <button class="print"><i class="fa-sharp fa-solid fa-print"></i> Print Receipt</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+
+            <div class="employee">
+                <p style="font-size: 18px; display: inline;">
+                    <span style="font-weight: 500; color: green;">{{request.user.username}} أهلا بك
+                    </span> 
+                    
+                </p>
+                   
+                <div>
+                    <p>
+    
+                        <strong>التاريخ:</strong>  الجمعة 8 مارس 2022   
+                    </p>
+                    <p> <strong>هوية الموظف : </strong> 12455</p>
+                   
+                </div>
+                <div class="rules">
+                    <p>يرجى التأكد من اتباع القواعد التالية عند حضور العميل</p>
+                    <ol>
+                      <li>efrtg5rtg5rt</li>
+                      <li>efrtg5rtg5rt</li>
+                   
+                    </ol>
+                </div>
+    </div>
+        </div>
+        {% endblock content %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %} 
+
+{% load static %}
+{% block content %} 
+    
+{% block style  %}
+<link rel="stylesheet" href="{% static 'modify.css'  %}">
+{% endblock style  %}
+
+   
+
+
+<div class="wrapper">
+    <h3>هل انت متأكد من الحذف؟?</h3>
+    
+    <button class="edit">
+        <a href="/currencies/rates/">
+            إلغاء
+        </a>
+        
+        </button>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button class="delete">حذف</button>
+        </form>
+    
+</div>
+
+
+            
+{% endblock content %}

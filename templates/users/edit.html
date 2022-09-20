@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% load static %}
+
+{% block style  %}
+<link rel="stylesheet" href="{% static 'modify.css'  %}">
+{% endblock style  %}
+
+{% block content %} 
+    
+    
+<div class="wrapper">
+                        
+                    
+
+    {% for message in messages %}
+        <p style="color: red">  {{ message }}</p>
+    {% endfor %}
+
+      {% if request.user.is_admin  %}
+      <h3>تعديل موظف</h3>
+    <form method="post">
+    
+        {% csrf_token %}
+
+
+        <div class="form-control">
+        
+            <input type="text" placeholder="First Name" name="first_name" value="{{user.first_name}}"/>
+        </div>
+        <div class="form-control">
+        
+            <input type="text" placeholder="Last Name" name="last_name" value="{{user.last_name}}" />
+        </div>
+        <div class="form-control">
+        
+            <input type="text" placeholder="اسم المستخدم" name="username" value="{{user.username}}" />
+        </div>
+        <div class="form-control">
+        
+            <input type="password" placeholder="كلمة المرور" name="pass_entry" value="{{user.pass_entry}}" />
+        </div>
+        <button>اضافة</button>
+    </form>
+
+    {% endif  %}
+</div>
+
+    
+
+            
+{% endblock content %}

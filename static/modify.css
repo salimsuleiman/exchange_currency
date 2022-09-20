@@ -1,0 +1,31 @@
+.wrapper{
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+input {
+    width: 50%;
+    font-family: inherit;
+    height: 35px;
+    max-width: 100%;
+    font-size: 18px;
+   background-color: #FBFBFB;
+   font-weight: 500;
+    padding: 8px 0 8px;
+    padding-left: 10px;
+    outline: none;
+    border: 1px solid #d1d0d0;
+    border-radius: 4px;
+}
+
+button {
+    width: 50%;
+    background-color: #3571a3;
+    outline: none;
+    border: none;
+}
+
+label {
+    text-align: right;
+}

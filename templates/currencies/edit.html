@@ -1,0 +1,46 @@
+{% extends "base.html" %} 
+
+{% load static %}
+{% block content %} 
+    
+{% block style  %}
+<link rel="stylesheet" href="{% static 'modify.css'  %}">
+{% endblock style  %}
+
+   
+
+
+<div class="wrapper">
+    <h3>تعديل العملة</h3>
+    <form  method="POST">
+        {% for message in messages %}
+        <p style="color: red">  {{ message }}</p>
+        {% endfor %}
+    {% csrf_token %}
+    
+    
+    <div class="form-control">
+    
+        <input type="text" placeholder="Currency Name" name="name" value="{{currency.name}}"/>
+    </div>
+    <div class="form-control">
+    
+        <input type="text" placeholder="Symbol" name="symbol" value="{{currency.symbol}}"/>
+    </div>
+    <div class="form-control">
+    
+        <input type="number" placeholder="Buy Price" name="buy_price" value="{{currency.buy_price}}"/>
+    </div>
+     <div class="form-control">
+    
+        <input type="number" placeholder="Sell Price" name="sell_price" value="{{currency.sell_price}}"/>
+    </div>
+    
+    <button>اضافة</button>
+    </form>
+    
+</div>
+
+
+            
+{% endblock content %}
