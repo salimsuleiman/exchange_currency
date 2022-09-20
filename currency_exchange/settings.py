@@ -25,12 +25,9 @@ SECRET_KEY = 'django-insecure-1^f=dx)-ty3f-0^c&!d-irvlj_ih#ka=lo^$jbzjl5@+3%^e2z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['pure-forest-07337.herokuapp.com',
                 '127.0.0.1', '*']
-=======
 ALLOWED_HOSTS = ['pure-forest-07337.herokuapp.com/', '127.0.0.1', '*']
->>>>>>> 682c62a (make it better)
 
 
 # https://git.heroku.com/pure-forest-07337.git
