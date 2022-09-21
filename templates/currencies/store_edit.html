@@ -1,0 +1,63 @@
+{% extends "base.html" %} 
+
+{% load static %}
+{% block content %} 
+    
+{% block style  %}
+<link rel="stylesheet" href="{% static 'modify.css'  %}">
+{% endblock style  %}
+
+   
+
+
+<div class="wrapper">
+    
+    <div class="addnew-user customer-details">
+                        
+                    
+
+                       
+
+        {% if request.user.is_admin  %}
+        <h3>تحرير متجر العملات</h3>
+        {% for message in messages %}
+        <p style="color: red">  {{ message }}</p>
+    {% endfor %}
+       <form action="/currencies/store/edit/{{store.id}}/" method="POST">
+       
+           {% csrf_token %}
+
+
+           <div class="form-control">
+           
+               <input type="text" placeholder="اسم الموظف" name="name" value="{{store.name}}"/>
+           </div>
+           <div class="form-control">
+           <select name="currency" id="" style="width: 25%;" value="{{store.currency}}">
+                <option value="{{store.currency.id}}">{{store.currency.name}} ({{store.currency.symbol}})</option>
+                {% for c in currencies  %}
+                    {% if c.id != store.currency.id  %}
+                    <option value="{{c.id}}">{{c.name}} ({{c.symbol}})</option>
+                    {% endif  %}
+                {% endfor  %}
+               
+   
+           </select>
+       </div>
+           <div class="form-control">
+           
+               <input type="number" placeholder="سعر" name="price" value="{{store.price}}"/>
+           </div>
+           
+           
+           <button>اضافة</button>
+       </form>
+
+       {% endif  %}
+</div>
+    
+</div>
+
+
+            
+{% endblock content %}

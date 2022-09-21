@@ -11,12 +11,13 @@
 <body>
     <form action="/users/login/" method="post">
         
-              {% for message in messages %}
-                                <p style="color: red">  {{ message }}</p>
-            {% endfor %}
-             {% csrf_token %}
+             
     
         <img style="width: 15em;margin-left: 3.4em;margin-top: 2em;" src="{% static 'imgs/colog.png'  %}" alt="">
+        {% for message in messages %}
+        <p style="color: red; text-align: center;">  {{ message }}</p>
+{% endfor %}
+{% csrf_token %}
         <div class="form-control">
                                 
             <input type="text" placeholder="Enter Username" name="username" required/>

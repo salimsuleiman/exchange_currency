@@ -1,74 +1,93 @@
 {% extends "base.html" %} 
 
 {% load static %}
-
 {% block header %} 
-مستودع
-{% endblock header %}
+سعر العملة{% endblock header %}
 {% block title  %}
-مستودع
-        {% endblock title  %}
-{% block style  %}
-<link rel="stylesheet" href="{% static 'style.css'  %}">
-{% endblock style  %}
-
-
+سعر العملة        {% endblock title  %}
 {% block content %} 
+    
 
         <div class="container">
-           <div class="profits">
-               <span style="color: #333;"><strong>List 23 April 2022</strong> exchange profit  </span>
-            <table>
-                
-                     <tr>
-                         <th>اسم</th>
-                         <th>كمية</th>
-       
-                     </tr>
-                    
-     
-             
-                    
-                     <tr>
-                         <td>Dollar</td>
-                         <td>124ع.د</td>
-                         
-                     </tr>
-                     <tr>
-                         <td>Euro</td>
-                         <td>124ع.د</td>
-                         
-                     </tr>
-                     <tr>
-                         <td>Dollar</td>
-                         <td>124ع.د</td>
-                         
-                     </tr>
-                     <tr>
-                         <td>Dollar</td>
-                         <td>124ع.د</td>
-                         
-                     </tr>
-                     <tr>
-                         <td>Dollar</td>
-                         <td>124ع.د</td>
-                         
-                     </tr>
-                     <tr>
-                         <td>Dollar</td>
-                         <td>124ع.د</td>
+           <table>
+               
+                    <tr>
+                        <th>Currency</th>
+                        <th>Employee Name</th>
                         
-                     </tr>
-    
-            </table>
- 
+                        
+                        <th>Price</th>
 
-           </div>
+                        <th>actions</th>
+                    </tr>
+                   
+    
+                    {% for s in stores  %}
+
+                    <tr>
+                        <td>{{s.currency.name}} {{s.currency.symbol}}</td>
+                        <td>{{s.name}}</td>
+                       
+                        <td>{{s.price}}</td>
+                     
+                        {% if request.user.is_admin  %}
+                        <td>
+                            <button class="edit">
+                            <a href="/currencies/store/edit/{{s.id}}/">
+                                edit
+                            </a>
+                            
+                            </button>
+                     
+                        </td>
+                        {% endif  %}
+                    </tr>
+                    {% endfor  %}
+                   
+           </table>
            
-    
+  
         </div>
-    </main>
-</body>
-</html>
+          <div class="container">
+                <div class="addnew-user customer-details">
+                        
+                    
 
+                       
+
+                         {% if request.user.is_admin  %}
+                         <h3>Add  new currency store</h3>
+                         {% for message in messages %}
+                         <p style="color: red">  {{ message }}</p>
+                     {% endfor %}
+                        <form action="/currencies/store/add/" method="POST">
+                        
+                            {% csrf_token %}
+
+
+                            <div class="form-control">
+                            
+                                <input type="text" placeholder="Employee Name" name="name" />
+                            </div>
+                            <div class="form-control">
+                            <select name="currency" id="" style="width: 25%;">
+                                {% for c in currencies  %}
+                                    <option value="{{c.id}}">{{c.name}} ({{c.symbol}})</option>
+                                {% endfor  %}
+                                
+                    
+                            </select>
+                        </div>
+                            <div class="form-control">
+                            
+                                <input type="number" placeholder="Price" name="price" />
+                            </div>
+                            
+                            
+                            <button>اضافة</button>
+                        </form>
+
+                        {% endif  %}
+                </div>
+            </div>
 {% endblock content %}

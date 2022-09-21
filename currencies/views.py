@@ -1,11 +1,13 @@
+from locale import currency
 from django.shortcuts import render, redirect
 from users.models import User
-from currencies.models import Currency
+from currencies.models import Currency, Store
 from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from decimal import *
 from transactions.models import Transaction
+
 @login_required
 def Rates(request):
     currencies = Currency.objects.all()
@@ -116,7 +118,53 @@ def exchange(request):
 
 
 def warehouse(request):
-    return render(request, 'currencies/warehouse.html')
+    currencies = Currency.objects.all()
+    stores=Store.objects.all()
+
+    return render(request, 'currencies/warehouse.html',  {'currencies': currencies, 'stores':stores})
+
+def store_edit(request,ID):
+    store = Store.objects.filter(id=ID).first()
+    if store is None:
+        return redirect('/currencies/warehouse/')
+    currencies = Currency.objects.all()
+
+    if request.method == 'POST':
+        name = request.POST['name']
+        price = request.POST['price']
+        currency = request.POST['currency']
+
+        c = Currency.objects.filter(id=currency).first()
+        if c is None:
+            return redirect('/currencies/warehouse/')
+        if '' in (name, currency, price):
+            messages.add_message(request, messages.INFO, 'الرجاء إدخال كافة الحقول')
+            return redirect('/currencies/warehouse/')
+        store.name=name
+        store.price=price
+        store.currency=c
+        store.save()
+        return redirect('/currencies/warehouse/')
+       
+
+    return render(request, 'currencies/store_edit.html', {'store':store, 'currencies':currencies})
+
+def store_add(request):
+    
+    name = request.POST['name']
+    price = request.POST['price']
+    currency = request.POST['currency']
+
+    if '' in (name, currency, price):
+            messages.add_message(request, messages.INFO, 'الرجاء إدخال كافة الحقول')
+            return redirect('/currencies/warehouse/')
+
+    c = Currency.objects.filter(id=currency).first()
+    if c is None:
+        return redirect('/currencies/warehouse/')
+    store = Store.objects.create(name=name, price=price, currency=c)
+    return redirect('/currencies/warehouse/')
+
 
 def reciepts(request):
     transactions = Transaction.objects.all()

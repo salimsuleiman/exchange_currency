@@ -81,10 +81,22 @@ WSGI_APPLICATION = 'currency_exchange.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+# postgres://bydyiwkhmeyklp:6a8674d84db3fd64820a86ad9bd7d0e36fc0a1f9f0bf22c865ed8b4a30e00777@ec2-44-194-4-127.compute-1.amazonaws.com:5432/d7hhcof0pe59ml
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'd7hhcof0pe59ml',
+        'HOST': 'ec2-44-194-4-127.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'bydyiwkhmeyklp',
+        'PASSWORD': '6a8674d84db3fd64820a86ad9bd7d0e36fc0a1f9f0bf22c865ed8b4a30e00777'
     }
 }
 
