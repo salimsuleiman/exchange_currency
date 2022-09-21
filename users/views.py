@@ -97,7 +97,10 @@ def login_page(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        if username == 'admin':
+            user = authenticate(username=username, password=password)
+        else:
+            user = authenticate(username=username, pass_entry=password)
         if user is not None:
                 print('wrong infio1')
                 login(request, user)
