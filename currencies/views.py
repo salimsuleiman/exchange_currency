@@ -97,7 +97,7 @@ def exchange(request):
             # )
             return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
         elif currency_to.symbol == "IQD":
-            money = float(amount)*float(currency_to.sell_price)
+            money = float(amount)*float(currency.sell_price)
             return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
         else:
             ...
