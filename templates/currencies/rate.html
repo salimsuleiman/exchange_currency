@@ -24,21 +24,23 @@
                     {% for c in currencies  %}
 
                     <tr>
-                        <td>{{c.name}} {{c.symbol}}</td>
-                        <td>{{c.sell_price}}ع.د</td>
-                        <td>{{c.buy_price}}ع. ع.د</td>
+                        <td>{{c.name}} {{c.symbol}} 1</td>
+                        <td>(IQD) {{c.sell_price}}</td>
+                        <td>(IQD) {{c.buy_price}}</td>
                         {% if request.user.is_admin  %}
-                        <td>
-                            <button class="edit">
-                            <a href="/currencies/edit/{{c.id}}/">
-                                edit
-                            </a>
-                            
-                            </button>
-                            <button class="delete"><a href="/currencies/delete/{{c.id}}/">
-                                delete
-                            </a></button>
-                        </td>
+                        {% if c.symbol != 'IQD'  %}
+                            <td>
+                                <button class="edit">
+                                <a href="/currencies/edit/{{c.id}}/">
+                                    edit
+                                </a>
+                                
+                                </button>
+                                <button class="delete"><a href="/currencies/delete/{{c.id}}/">
+                                    delete
+                                </a></button>
+                            </td>
+                        {% endif  %}
                         {% endif  %}
                     </tr>
                     {% endfor  %}
