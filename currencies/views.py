@@ -169,3 +169,9 @@ def store_add(request):
 def reciepts(request):
     transactions = Transaction.objects.all()
     return  render(request, 'currencies/reciepts.html', {'transactions':transactions})
+
+
+
+def profits(request):
+    transactions = Transaction.objects.all()
+    return render(request,'currencies/profits.html', {'transactions':transactions})

@@ -11,6 +11,7 @@ urlpatterns = [
     path('exchange/', exchange),
     path('warehouse/', warehouse),
     path('reciepts/', reciepts),
+    path('profits/', profits),
     path('store/add/', store_add),
     path('store/edit/<int:ID>/', store_edit),
     path('delete/<int:ID>/', delete),

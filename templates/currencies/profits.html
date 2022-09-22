@@ -21,12 +21,9 @@ Receipts
             <table>
                 
                      <tr>
-                         <th>From</th>
-                         <th>To</th>
-                         <th>Type</th>
-                         <th>Price</th>
-                         <th>Buy price</th>
-                         <th>Sell price</th>
+                         <th>Currency</th>
+                         <th>Total sold</th>
+                         <th>Profit</th>
        
                      </tr>
                     
@@ -35,12 +32,10 @@ Receipts
                     
                      {% for tx in transactions  %}
                      <tr>
-                         <td>{{tx.currency.name}}</td>
                          <td>{{tx.currency_to.name}}</td>
-                         <td>{{tx.tx_type}}</td>
-                         <td>{{tx.price}}</td>
-                         <td>{{tx.buy_price}}</td>
-                         <td>{{tx.sell_price}}</td>
+                         <td>{{tx.total_sold}}</td>
+                         <td>{{tx.profit}}</td>
+                        
                         
                      </tr>
                      {% endfor  %}
