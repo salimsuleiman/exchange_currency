@@ -87,7 +87,7 @@ def exchange(request):
             return redirect('/currencies/exchange/')
         
         if currency.symbol == 'IQD':
-            money = float(amount)/float(currency_to.sell_price)
+            money = float(amount)*float(currency_to.sell_price)
             # tx = Transaction.objects.create(
             #     sell_price=currency_to.sell_price, 
             #     buy_price=currency_to.buy_price, 
