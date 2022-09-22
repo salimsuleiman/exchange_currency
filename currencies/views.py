@@ -87,7 +87,7 @@ def exchange(request):
             return redirect('/currencies/exchange/')
         
         if currency.symbol == 'IQD':
-            money = float(amount)*float(currency_to.sell_price)
+            money = float(amount)/float(currency_to.sell_price)
             # tx = Transaction.objects.create(
             #     sell_price=currency_to.sell_price, 
             #     buy_price=currency_to.buy_price, 
@@ -96,7 +96,9 @@ def exchange(request):
             #     currency_to=currency_to
             # )
             return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
-
+        elif currency_to.symbol == "IQD":
+            money = float(amount)*float(currency_to.sell_price)
+            return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
         else:
             ...
             # convert currency to iqd
