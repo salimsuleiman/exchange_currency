@@ -22,7 +22,7 @@
                    
     
                     {% for c in currencies  %}
-
+                    {% if c.symbol != 'IQD'  %}
                     <tr>
                         <td>{{c.name}} {{c.symbol}} 1</td>
                         <td>(IQD) {{c.sell_price}}</td>
@@ -43,6 +43,7 @@
                         {% endif  %}
                         {% endif  %}
                     </tr>
+                    {% endif  %}
                     {% endfor  %}
                    
            </table>
