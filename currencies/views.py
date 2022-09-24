@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from decimal import *
 from transactions.models import Transaction
+from conversion import *
 
 @login_required
 def Rates(request):
@@ -25,8 +26,16 @@ def delete(request, ID):
 
     return render(request, 'currencies/delete.html')
 
+# can you see me ;) mxe how do i chat with you here?
+# can you type? 
+# i opened the home .html does it shows to you?
+# See this? Salim
+# yeah i did
 
-
+# friggin cool man
+#hello salim
+# mxe shut up
+# that's the views conversion file for the exchanges
 @login_required
 def edit(request, ID):
     currency = Currency.objects.filter(id=ID).first()
@@ -86,36 +95,21 @@ def exchange(request):
         if '' in (amount, currency, currency_to):
             return redirect('/currencies/exchange/')
         
-        if currency.symbol == 'IQD':
-            money = float(amount)/float(currency_to.sell_price)
-            # tx = Transaction.objects.create(
-            #     sell_price=currency_to.sell_price, 
-            #     buy_price=currency_to.buy_price, 
-            #     tx_type='sell', 
-            #     currency=currency, 
-            #     currency_to=currency_to
-            # )
-            return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
-        elif currency_to.symbol == "IQD":
-            money = float(amount)*float(currency.sell_price)
-            return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money, 'rate': currency_to.sell_price, "symbol_to": currency.symbol, "symbol": currency_to.symbol})
+        if currency.symbol != currency_to.symbol:
+        
+            if currency.symbol == 'IQD':
+                
+                money = local_to_foreing(amount, currency_to.sell_price)
+                return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money,  "symbol_to": currency_to.symbol})
+            elif currency_to.symbol == "IQD":
+                # it's a buy tx
+                # money = float(amount)*float(currency.sell_price)
+                money = foreing_to_local(amount, currency.buy_price)
+                return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money,  "symbol_to": currency_to.symbol})
         else:
-            ...
-            # convert currency to iqd
-            money = float(amount)*float(currency.sell_price)
-            # convert iqd to currency to 
+            # can't convert same currency =)
+            return redirect('/currencies/exchange/')
 
-            money2 = float(money)/float(currency_to.sell_price)
-            print(money2)
-            # tx = Transaction.objects.create(
-            #     sell_price=currency_to.sell_price, 
-            #     buy_price=currency_to.buy_price, 
-            #     tx_type='sell', 
-            #     currency=currency, 
-            #     currency_to=currency_to
-            # )
-            return render(request, 'currencies/exchange.html', {'currencies': currencies, 'money': money2, 'rate': currency_to.sell_price, "symbol_to": currency_to.symbol, "symbol":  currency.symbol})
-    
     return render(request, 'currencies/exchange.html', {'currencies': currencies})
 
 
