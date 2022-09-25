@@ -22,7 +22,7 @@ Receipts
                 
                      <tr>
                          <th>Currency</th>
-                         <th>Total sold</th>
+                        <th>price</th>
                          <th>Profit</th>
        
                      </tr>
@@ -32,9 +32,10 @@ Receipts
                     
                      {% for tx in transactions  %}
                      <tr>
-                         <td>{{tx.currency_to.name}}</td>
-                         <td>{{tx.total_sold}}</td>
+                         <td>{{tx.symbol}} {{tx.name}}</td>
+                         <td>{{tx.price}}</td>
                          <td>{{tx.profit}}</td>
+                        
                         
                         
                      </tr>

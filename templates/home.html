@@ -31,21 +31,25 @@
                         <div class="box">
                             <a href="/currencies/rates/"><h2>سعر عملة</h2></a>
                         </div>   
+                        {% if request.user.is_admin  %}
                         <div class="box">
                             <a href="/currencies/profits/"><h2>ارباح</h2></a>
                         </div>   
-                        <div class="box">
-                            <a href="/currencies/receipts/"><h2>وصل</h2></a>
-                        </div>  
-                        <!-- <div class="box">
-                            <a href="#"><h2>مخزن</h2></a>
-                        </div>    -->
                         <div class="box">
                             <a href="/currencies/warehouse/"><h2>راس المال</h2></a>
                         </div>   
                         <div class="box">
                             <a href="/users/"><h2>مستخدمين</h2></a>
                         </div>   
+                        {% endif  %}
+                        <div class="box">
+                            <a href="/currencies/reciepts/"><h2>وصل</h2></a>
+                        </div>  
+                        <!-- <div class="box">
+                            <a href="#"><h2>مخزن</h2></a>
+                        </div>    -->
+                      
+                       
                         <div class="box">
                             <a href="/users/logout/"><h2>تسجيل خروج</h2></a>
                         </div>  

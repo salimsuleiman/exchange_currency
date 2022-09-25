@@ -169,5 +169,16 @@ def reciepts(request):
 
 
 def profits(request):
+    # profit = float(amount_converted_sell_price) - float(amount_converted_buy_price)
+
     transactions = Transaction.objects.all()
-    return render(request,'currencies/profits.html', {'transactions':transactions})
+
+
+    data = []
+    for tx in transactions:
+        if tx.tx_type == 'sell':
+            profit = -tx.price
+            data.append({'profit': 4, 'symbol': tx.currency_to.symbol, 'name': tx.currency_to.name, 'price': tx.price})
+
+    print(data)
+    return render(request,'currencies/profits.html', {'transactions':data})
